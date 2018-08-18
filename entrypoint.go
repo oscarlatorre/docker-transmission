@@ -69,6 +69,8 @@ func main() {
 	// First argument must be the program being executed
 	args := append([]string{program}, os.Args[1:]...)
 
+	fmt.Printf("Starting %v\n", args)
+
 	if err := syscall.Exec(program, args, os.Environ()); err != nil {
 		logerr("Error during exec", err)
 		os.Exit(1)
