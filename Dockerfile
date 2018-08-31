@@ -21,12 +21,14 @@ RUN set -x &&\
 
 RUN set -x &&\
     cd transmission-2.94 &&\
-    CFLAGS="-Os -march=native" ./configure \
+    CFLAGS="-Os" ./configure \
+        --enable-utp \
+        --with-inotify \
+        --enable-cli \
         --disable-gtk \
         --disable-mac \
         --disable-wx \
         --disable-beos \
-        --disable-cli \
         --disable-nls \
         &&\
     make -j 4 &&\
@@ -47,7 +49,7 @@ LABEL maintainer="Oscar Latorre <oscarlatorre@pm.me>"
 # >
 # >  Contents of section .interp:
 # >   0200 2f6c6962 2f6c642d 6d75736c 2d783836  /lib/ld-musl-x86
-# >   0210 5f36342e 736f2e31 00                 _64.so.1.   
+# >   0210 5f36342e 736f2e31 00                 _64.so.1.
 
 # $ ldd /transmission-2.94/daemon/transmission-daemon
 # >                          /lib/ld-musl-x86_64.so.1   (0x7f680aa37000)
